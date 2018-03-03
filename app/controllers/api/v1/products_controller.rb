@@ -7,14 +7,14 @@ class Api::V1::ProductsController < ApplicationController
   def create
     product = Product.new(products_params)
     if product.save
-      @product, status: 201
+      render json: @product, status: 201
     else
-      { errors: product.errors }, status: 422
+      render json: { errors: product.errors }, status: 422
     end
   end
 
   private
-
+  
   def products_params
     params.require(:product).permit(:name, :price)
   end
